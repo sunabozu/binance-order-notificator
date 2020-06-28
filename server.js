@@ -36,8 +36,6 @@ if(!BINANCE_KEY) {
   PUSHED_SECRET = now_keys.pushed_secret
 }
 
-console.log(BINANCE_KEY, BINANCE_SECRET)
-
 // create a new client
 const bclient = Binance({
   apiKey: BINANCE_KEY,
@@ -126,7 +124,6 @@ const cleanSocket = () => {
   })
   .catch(err => {
     console.log(err)
-    console.log('KEYS:', BINANCE_KEY, BINANCE_SECRET)
     // clean()
     cleanSocket()
     // process.exit(1)
