@@ -1,0 +1,21 @@
+name: remote ssh command
+on: [push]
+jobs:
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.GCE_HOST }}
+        username: troorl
+        key: ${{ secrets.GCE_KEY }}
+        script: |
+          rm -rf ${{ secrets.PROJ_NAME }}
+          git clone https://github.com/sunabozu/${{ secrets.PROJ_NAME }}.git
+          git status
+          cd ${{ secrets.PROJ_NAME }}
+          npm i
+          pm2 restart ${{ secrets.PROJ_NAME }}
